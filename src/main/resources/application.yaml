@@ -1,0 +1,25 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /test-toolkit
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      url: jdbc:mysql:///test-toolkit
+      username: root
+      password: 990729
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis-plus:
+  type-aliases-package: com.hltn.test.entity
+  global-config:
+    db-config:
+      logic-delete-field: isDeleted
+      id-type: auto
+
+jwt:
+  token:
+    tokenExpiration: 43200 # token有效时间 30天
+    tokenSignKey: hltntest  # 加密密钥
