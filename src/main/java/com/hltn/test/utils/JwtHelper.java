@@ -23,8 +23,6 @@ public class JwtHelper {
      * @return
      */
     public  String createToken(Long userId) {
-        System.out.println("tokenExpiration = " + tokenExpiration);
-        System.out.println("tokenSignKey = " + tokenSignKey);
         String token = Jwts.builder()
 
                 .setSubject("YYGH-USER")

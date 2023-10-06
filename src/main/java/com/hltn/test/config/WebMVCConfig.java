@@ -12,7 +12,8 @@ public class WebMVCConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //设置请求拦截器拦截和不拦截的路径
-        registry.addInterceptor(loginProtectedInterceptor).addPathPatterns("/**")
+//        registry.addInterceptor(loginProtectedInterceptor).addPathPatterns("/**")
+        registry.addInterceptor(loginProtectedInterceptor).addPathPatterns("/device/**")
         .excludePathPatterns("/user/login")
         .excludePathPatterns("/user/register");
     }

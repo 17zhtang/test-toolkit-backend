@@ -54,7 +54,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         }
         //加密
         user.setPassword(MD5Util.encrypt(user.getPassword()));
+
         userMapper.insert(user);
+
         return Result.ok("null");
     }
 
