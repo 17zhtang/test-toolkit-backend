@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 @Component
+/**
+ *  未处理多处登录token过期
+ */
 public class LoginProtectedInterceptor implements HandlerInterceptor {
     @Autowired
     private JwtHelper jwtHelper;
