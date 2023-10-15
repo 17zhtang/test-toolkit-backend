@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hltn.test.mapper.TestAccountMapper">
+
+    <resultMap id="BaseResultMap" type="com.hltn.test.entity.TestAccount">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="account" column="account" jdbcType="VARCHAR"/>
+            <result property="environment" column="environment" jdbcType="TINYINT"/>
+            <result property="detail" column="detail" jdbcType="VARCHAR"/>
+            <result property="creatorId" column="creator_id" jdbcType="BIGINT"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <resultMap id="QueryMap" type="com.hltn.test.dto.resp.GetTestAccountsRespDto">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="account" column="account" jdbcType="VARCHAR"/>
+        <result property="environment" column="environment" jdbcType="TINYINT"/>
+        <result property="detail" column="detail" jdbcType="VARCHAR"/>
+        <result property="creatorId" column="creator_id" jdbcType="BIGINT"/>
+        <result property="creator" column="creator" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getTestAccounts" resultMap="QueryMap">
+        SELECT
+            test_account.id,
+            test_account.account,
+            environment,
+            detail,
+            creator_Id,
+            USER.username AS creator
+        FROM
+            test_account
+                LEFT JOIN USER ON test_account.creator_id = USER.id
+    </select>
+
+    <sql id="Base_Column_List">
+        id,account,environment,
+        detail,creator_id,create_time,
+        update_time,is_deleted
+    </sql>
+
+</mapper>
