@@ -28,7 +28,7 @@ public class UserController {
         return result;
     }
 
-    @PostMapping("getUserInfo")
+    @GetMapping("getUserInfo")
     public Result getUserInfo(@RequestHeader String token){
         Result result = userService.getUserInfo(token);
         return result;
