@@ -5,6 +5,7 @@ import com.hltn.test.dto.req.GetTestAccountsReqDto;
 import com.hltn.test.dto.resp.GetTestAccountsRespDto;
 import com.hltn.test.entity.TestAccount;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
 * @author 18749
@@ -14,7 +15,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface TestAccountMapper extends BaseMapper<TestAccount> {
 
-    Page<GetTestAccountsRespDto> getTestAccounts(Page<GetTestAccountsRespDto> page, GetTestAccountsReqDto dto);
+    Page<GetTestAccountsRespDto> getTestAccounts(Page<GetTestAccountsRespDto> page, @Param("dto") GetTestAccountsReqDto dto);
 }
 
 

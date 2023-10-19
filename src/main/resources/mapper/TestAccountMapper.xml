@@ -24,10 +24,10 @@
         <result property="creator" column="creator" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <select id="getTestAccounts" resultMap="QueryMap">
+    <select id="getTestAccounts" resultMap="QueryMap" parameterType="com.hltn.test.dto.req.GetTestAccountsReqDto">
         SELECT
-            test_account.id,
-            test_account.account,
+            test_account.id as id,
+            test_account.account as account,
             environment,
             detail,
             creator_Id,
@@ -35,6 +35,21 @@
         FROM
             test_account
                 LEFT JOIN USER ON test_account.creator_id = USER.id
+        <where>
+            <if test ="dto.account != null and dto.account != ''">
+                test_account.account like concat('%',#{dto.account},'%')
+            </if>
+            <if test ="dto.environment != null and dto.environment != ''">
+               and environment = #{dto.environment}
+            </if>
+            <if test ="dto.detail != null and dto.detail != ''">
+               and detail like concat('%',#{dto.detail},'%')
+            </if>
+            <if test ="dto.creator != null and dto.creator != ''">
+                and creator like concat('%',#{dto.creator},'%')
+            </if>
+
+        </where>
     </select>
 
     <sql id="Base_Column_List">
