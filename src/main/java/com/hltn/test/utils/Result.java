@@ -33,6 +33,12 @@ public class Result<T> {
         Result<T> result = build(data);
         return build(data, ResultCodeEnum.SUCCESS);
     }
+
+    public static<T> Result<T> error(T data){
+        Result<T> result = build(data);
+        return build(data, ResultCodeEnum.ERROR);
+    }
+
     public Result<T> message(String msg){
         this.setMessage(msg);
         return this;
