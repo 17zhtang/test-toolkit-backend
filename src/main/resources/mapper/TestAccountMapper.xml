@@ -31,7 +31,7 @@
             environment,
             detail,
             creator_Id,
-            USER.username AS creator
+            user.username AS creator
         FROM
             test_account
                 LEFT JOIN USER ON test_account.creator_id = USER.id

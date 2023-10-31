@@ -3,6 +3,8 @@ server:
   servlet:
     context-path: /test-toolkit
 
+
+
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
