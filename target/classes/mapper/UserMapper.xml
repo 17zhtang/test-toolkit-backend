@@ -21,4 +21,14 @@
         username,group_id,avatar,
         create_time,update_time,is_deleted
     </sql>
+
+    <update id="setToken" >
+        update user set token = #{token} where id = #{uid}
+    </update>
+
+    <select id="getToken" resultType="java.lang.String">
+        select token from user where id = #{uid}
+    </select>
+
+
 </mapper>
