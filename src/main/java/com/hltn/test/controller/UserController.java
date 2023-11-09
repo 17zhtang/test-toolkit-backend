@@ -16,8 +16,6 @@ public class UserController {
     private UserService userService;
     @PostMapping("login")
     public Result login(@RequestBody User user){
-        Logger logger = LoggerFactory.getLogger(getClass());
-        logger.info("日志测试");
         Result result = userService.login(user);
         return result;
     }
@@ -31,6 +29,12 @@ public class UserController {
     @GetMapping("getUserInfo")
     public Result getUserInfo(@RequestHeader String token){
         Result result = userService.getUserInfo(token);
+        return result;
+    }
+
+    @PostMapping("logout")
+    public Result logout(@RequestHeader String token){
+        Result result = userService.logout(token);
         return result;
     }
 }

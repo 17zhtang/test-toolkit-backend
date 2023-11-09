@@ -18,7 +18,7 @@ public class QRCodeController {
     QRCodeService qrCodeService;
     @PostMapping ("getQRCode")
     public Result generateQRCode(@RequestBody GetQRCodeReqDto dto, HttpServletResponse servletResponse) throws IOException {
-        log.info("generateQRCode");
+        log.info("generateQRCode,dto:{}",dto);
         qrCodeService.generateStream(dto.getContent(),servletResponse);
         return Result.ok(null);
     }

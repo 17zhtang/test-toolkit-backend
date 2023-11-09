@@ -9,6 +9,7 @@ import com.hltn.test.utils.JwtHelper;
 import com.hltn.test.utils.MD5Util;
 import com.hltn.test.utils.Result;
 import com.hltn.test.utils.ResultCodeEnum;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 * @description 针对表【user(用户表)】的数据库操作Service实现
 * @createDate 2023-10-03 19:19:01
 */
+@Slf4j
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     implements UserService{
@@ -40,7 +42,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
         String token = jwtHelper.createToken(loginUser.getId());
 
+        userMapper.setToken(loginUser.getId(),token);
+
         return Result.ok(token);
+    }
+
+    public Result logout(String token){
+        Long uid = jwtHelper.getUserId(token);
+        userMapper.setToken(uid,null);
+        return Result.ok("null");
     }
 
     @Override
@@ -70,6 +80,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         User user = userMapper.selectById(userId);
         user.setPassword("");
         return Result.ok(user);
+    }
+
+    @Override
+    public String getToken(Long uid) {
+        String token = userMapper.getToken(uid);
+        return token;
     }
 
 

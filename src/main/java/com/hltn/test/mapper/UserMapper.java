@@ -2,6 +2,7 @@ package com.hltn.test.mapper;
 
 import com.hltn.test.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
 * @author 18749
@@ -10,7 +11,9 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity com.hltn.test.entity.User
 */
 public interface UserMapper extends BaseMapper<User> {
+    public int setToken(@Param("uid") Long uid, @Param("token") String token);
 
+    public String getToken(@Param("uid") Long uid);
 }
 
 
