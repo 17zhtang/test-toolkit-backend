@@ -1,6 +1,7 @@
 package com.hltn.test.interceptors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hltn.test.exception.AuthException;
 import com.hltn.test.service.UserService;
 import com.hltn.test.utils.JwtHelper;
 import com.hltn.test.utils.Result;
@@ -25,8 +26,10 @@ public class LoginProtectedInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         log.info("进入登录状态拦截器");
-        String token = request.getHeader("token");
+        String token = request.getHeader("Token");
         Long user_id = jwtHelper.getUserId(token);
+        log.info("用户id"+user_id);
+        log.info("请求token"+token);
         String userToken = userService.getToken(user_id); //数据库中的token
         boolean equal = userToken.equals(token);
         boolean expiration = jwtHelper.isExpiration(token);
@@ -38,6 +41,7 @@ public class LoginProtectedInterceptor implements HandlerInterceptor {
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(result);
         response.getWriter().print(json);
-        return false;
+        throw new AuthException();  //认证失败，抛异常
+//        return false;
     }
 }
